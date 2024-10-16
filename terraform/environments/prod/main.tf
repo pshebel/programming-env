@@ -16,6 +16,6 @@ provider "aws" {
 }
 
 module "programming" {
-  source = "github.com/pshebel/progamming-env/terraform/modules/programming"
+  source = "github.com/pshebel/programming-env/terraform/modules/programming"
 
 }

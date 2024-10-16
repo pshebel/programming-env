@@ -47,6 +47,7 @@ resource "aws_security_group" "programming-sg" {
 
 resource "aws_key_pair" "programming" {
   key_name   = "programming"
+  public_key = var.public_key
 }
 
 data "aws_ami" "debian" {
@@ -62,19 +63,24 @@ data "aws_ami" "debian" {
 
 resource "aws_ebs_volume" "programming" {
   availability_zone = "us-east-1a"
-  size              = 40
+  size              = 1
 
   tags = {
     Name = "programming"
   }
 }
 
+resource "aws_volume_attachment" "programming-ebs" {
+  device_name = "dev/sdh"
+  volume_id = aws_ebs_volume.programming.id
+  instance_id = aws_instance.programming.id
+}
+
 resource "aws_instance" "programming" {
   ami           = data.aws_ami.debian.id
-  ebs_block_device = aws_ebs_volume.programming.id  
   instance_type = "t3.micro"
   vpc_security_group_ids = [aws_security_group.programming-sg.id]
-  subnet_id              = data.aws_subnet.programming-subnet.id
+  subnet_id              = aws_subnet.programming.id
   key_name = "programming"
   tags = {
     Name = "programming"
