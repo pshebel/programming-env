@@ -1,0 +1,39 @@
+---
+- hosts: env
+  become: yes
+  tasks:
+  - name: "mkdir"
+    file:
+      path: /data
+      state: directory
+  - name: "mount volume"
+    mount:
+      path: /data
+      src: /dev/nvme1n1
+      fstype: xfs
+      state: present
+  - name: "compiler"
+    apt: 
+      name: build-essential
+      state: latest
+      update_cache: yes
+  - name: "MPI"
+    apt: 
+      name: openmpi-bin
+      state: latest
+      update_cache: yes
+  - name: "MPI dev"
+    apt:
+      name: install libopenmpi-dev
+      state: latest
+      update_cache: yes
+  - name: "debugging"
+    apt: 
+      name: valgrind
+      state: latest
+      update_cache: yes
+  - name: "development tools"
+    apt: 
+      name: git
+      state: latest
+      update_cache: yes
