@@ -1,1 +1,1 @@
-{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"programming","Source":"git::https://github.com/pshebel/programming-env.git//terraform/modules/programming","Dir":".terraform/modules/programming/terraform/modules/programming"}]}
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"programming","Source":"file:///Users/phil/Projects/temple/programming-env/terraform/modules/programming","Dir":".terraform/modules/programming"}]}
